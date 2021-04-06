@@ -10,9 +10,9 @@ export default function Number (props) {
   const dispacth = useDispatch();
 
   function updateAngka (angka) {
-    let newSudoku = sudoku;
-    newSudoku[indexBaris][indexKolom] = Number(angka);
-    console.log(3);
+    console.log(angka);
+    // let newSudoku = sudoku;
+    // newSudoku[indexBaris][indexKolom] = Number(angka);
     // dispacth(getSudoku(newSudoku));
   }
 
@@ -26,7 +26,7 @@ export default function Number (props) {
 
   return (
     <View>
-      <TextInput style = { styles.input } keyboardType = 'numeric' maxLength= { 1 }  onChangeText = { (itemValue, itemIndex) => updateAngka(itemValue) }>
+      <TextInput style = { styles.input } keyboardType = 'numeric' maxLength= { 1 }  onChangeText = { (itemValue) => updateAngka(itemValue) }>
         { angka !== 0 ? angka : '' }
       </TextInput>
     </View>

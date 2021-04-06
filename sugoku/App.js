@@ -20,7 +20,6 @@ export default function App() {
         <Stack.Screen name= "Game" component={ Game } />
       </Stack.Navigator>
       </NavigationContainer>
-
     </Provider>
 
   )
