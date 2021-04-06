@@ -1,15 +1,17 @@
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import React, { useState } from 'react';
 import Number from './Number';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 export default function Board (props) {
-  const { row } = props;
+  const { row, indexBaris } = props;
 
   function textInput () {
     return (
-      row.map((angka, index) => <Number angka = { angka } key = { index }> </Number>)
+      row.map((angka, index) => {
+        return(
+         <Number angka = { angka } indexBaris = {indexBaris} indexKolom = { index } key = { index }> </Number>
+        )
+      })
     )
   }
 

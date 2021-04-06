@@ -7,8 +7,9 @@ function reducer (state = initialState, action) {
   const { type, payload } = action;
 
   if (type === 'sudoku/getSudoku') {
-    return { ...state, sudokuStore : payload}
-  }
+    console.log(2);
+    return { ...state, sudokuStore : payload }
+  } 
 
   return state;
 }

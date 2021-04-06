@@ -1,12 +1,12 @@
 import axios from 'axios';
-import arrayTransform from '../helpers/arrayConvert';
 
 export function getSudoku (payload) {
-  return { type : 'sudoku/getSudoku', payload}
+  console.log(1);
+  return { type : 'sudoku/getSudoku', payload }
 }
 
 export function getSudokuAsync (difficulty) {
-  return (dispacth) => {
+  return (dispatch) => {
     axios({
       url : 'https://sugoku.herokuapp.com/board?difficulty=' + difficulty,
       method : "GET",
@@ -15,7 +15,7 @@ export function getSudokuAsync (difficulty) {
         return data
       })
       .then ( data => {
-        dispatch(getSudoku(arrayTransform(data.board)));
+        dispatch(getSudoku((data.board)));
       })
       .catch(err => {
         console.log(err);

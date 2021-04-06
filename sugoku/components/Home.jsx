@@ -1,7 +1,5 @@
 import { StyleSheet, Text, TextInput, Picker, Button, View, SafeAreaView } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 export default function Home ({ navigation }) {
   const [difficulty, setDifficulty] = useState('')
