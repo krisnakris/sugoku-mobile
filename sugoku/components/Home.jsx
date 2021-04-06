@@ -40,8 +40,6 @@ export default function Home ({ navigation }) {
           username, difficulty
         }) } />
       </View>
-
-
     </View>
   );
 

@@ -1,7 +1,8 @@
 import { TextInput, Text, View, StyleSheet } from "react-native"
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getSudoku } from '../store/action';
+import { validateSudokuAsync } from '../store/action';
+import encodeBoards from '../helpers/encodeParam';
 
 export default function Number (props) {
   const { angka, indexBaris, indexKolom } = props;
@@ -10,11 +11,13 @@ export default function Number (props) {
   const dispacth = useDispatch();
 
   function updateAngka (angka) {
-    console.log(angka);
-    // let newSudoku = sudoku;
-    // newSudoku[indexBaris][indexKolom] = Number(angka);
-    // dispacth(getSudoku(newSudoku));
+    let newSudoku = sudoku;
+    newSudoku[indexBaris][indexKolom] = Number(angka);
+    let data = { board : newSudoku };
+
   }
+  
+  // onChangeText = { (itemValue) => updateAngka(itemValue) 
 
   function isEditable () {
     if (angka !== 0) {
@@ -26,7 +29,7 @@ export default function Number (props) {
 
   return (
     <View>
-      <TextInput style = { styles.input } keyboardType = 'numeric' maxLength= { 1 }  onChangeText = { (itemValue) => updateAngka(itemValue) }>
+      <TextInput style = { styles.input } keyboardType = 'numeric' maxLength= { 1 } >
         { angka !== 0 ? angka : '' }
       </TextInput>
     </View>
