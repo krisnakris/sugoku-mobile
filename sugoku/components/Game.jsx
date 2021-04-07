@@ -32,7 +32,8 @@ export default function Game ({ route, navigation }) {
       if (status == 'broken' || status == 'unsolvable') {
        alert();
       } else if (status == 'solved') {
-        navigation.navigate('Finish', {
+        navigation.replace('Finish', {
+          username
         })
       }
   }, [status])
@@ -66,11 +67,11 @@ export default function Game ({ route, navigation }) {
       
       { generateBoxRow() }
 
-      <Text> Status { status } </Text>
-      <View>
+      <Text style={ styles.status }> Status : { status } </Text>
+      <View style={ styles.solve }>
         <Button title="Solve" onPress={ () => { solveGames() } }/>
       </View>
-      <View>
+      <View style={ styles.check }>
         <Button title="Check" onPress={ () => { checkGames() } }/>
       </View>
     </View>
@@ -89,5 +90,14 @@ const styles = StyleSheet.create({
   difficulty : {
     fontSize: 20,
     marginBottom : 20
+  },
+  status: {
+    marginTop: 20
+  },
+  solve: {
+    marginTop: 20
+  },
+  check: {
+    marginTop: 20
   }
 });

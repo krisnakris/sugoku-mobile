@@ -11,6 +11,8 @@ function reducer (state = initialState, action) {
     return { ...state, sudokuStore : payload }
   } else if (type === 'sudoku/setStatus') {
     return { ...state, status : payload }
+  } else if ( type === 'sudoku/done') {
+    return { ...state, sudokuStore : [], status : 'unsolved' }
   }
 
   return state;

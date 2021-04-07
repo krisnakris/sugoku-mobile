@@ -10,22 +10,29 @@ export default function Number (props) {
   const { angka, indexBaris, indexKolom } = props;
 
   function updateAngka (angka) {
-    let newSudoku = JSON.parse(JSON.stringify(sudoku));
-    newSudoku[indexBaris][indexKolom] = (+angka);
-    dispacth(getSudoku(newSudoku));
-  }
-  
-  function isEditable () {
-    if (angka !== 0) {
-      return false;
+    console.log(angka);
+    if (isNaN(+angka)) {
+      
     } else {
-      return true;
+      let newSudoku = JSON.parse(JSON.stringify(sudoku));
+      newSudoku[indexBaris][indexKolom] = (+angka);
+      dispacth(getSudoku(newSudoku));
     }
   }
+  
+  // function showAngka () {
+  //   if (+angka != 0) {
+  //     return <Text style = { styles.input }> { angka } </Text>
+  //   } else {
+  //     return <TextInput style = { styles.input } maxLength= { 1 } value = '' onChangeText = { (itemValue) => updateAngka(itemValue) }> </TextInput>
+  //   }
+  // }
+
+  // && angka != null && angka !== NaN 
 
   return (
     <View>
-      <TextInput style = { styles.input } maxLength= { 1 } value = { angka !== 0 ? `${angka}` : '' } onChangeText = {(itemValue) => updateAngka(itemValue)} >
+      <TextInput style = { styles.input } maxLength= { 1 } value = { angka !== 0 ? String(angka) : '' } onChangeText = {(itemValue) => updateAngka(itemValue)} >
       </TextInput>
     </View>
   )

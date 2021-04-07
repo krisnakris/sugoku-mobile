@@ -1,9 +1,37 @@
-import { StyleSheet, Text, TextInput, Picker, Button, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, TextInput, Picker, Alert, Button, View, SafeAreaView } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearBoard } from '../store/action';
 
 export default function Home ({ navigation }) {
   const [difficulty, setDifficulty] = useState('easy')
   const [username, setUsername] = useState('');
+  const dispatch = useDispatch();
+  
+  function alert () {
+  Alert.alert(
+    "Please Input your username and difficulty",
+    "Enter your name and level of difficulty",
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      { text: "OK", onPress: () => console.log("OK Pressed") }
+    ]
+  )};
+  
+  function startGame () {
+    if (username !== '' && difficulty !== '') {
+      dispatch(clearBoard());
+      navigation.navigate('Game', {
+        username, difficulty
+      })
+    } else {
+      alert();
+    }
+  }
 
   return (
     <View style={ styles.container }>
@@ -35,11 +63,10 @@ export default function Home ({ navigation }) {
         </Picker>
       </View>
      
-      <View>
-        <Button title="Start" onPress={ () => navigation.navigate('Game', {
-          username, difficulty
-        }) } />
+      <View style = { styles.start }>
+        <Button title= "Start" onPress={() => startGame() } />
       </View>
+
     </View>
   );
 }
@@ -61,4 +88,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
   },
+  start : {
+    marginTop: 200
+  }
 });

@@ -64,3 +64,7 @@ export function validateSudokuAsync (board) {
       .catch(console.warn)
   }
 }
+
+export function clearBoard () {
+  return { type : 'sudoku/done' }
+}
