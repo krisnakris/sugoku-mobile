@@ -1,20 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
+import { StyleSheet, Text, Alert, Button, View } from 'react-native';
 import Board from './Board';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSudokuAsync, solveSudokuAsync } from '../store/action';
+import { getSudokuAsync, solveSudokuAsync, validateSudokuAsync } from '../store/action';
 
-export default function Game ({ route }) {
+export default function Game ({ route, navigation }) {
   const { username, difficulty } = route.params;
-
   const dataStore = useSelector(state => state.sudokuStore);
   const status = useSelector(state => state.status);
-
   const dispatch = useDispatch();
+  
+  const alert = () =>
+  Alert.alert(
+    "Please Check Your Input",
+    "This sudoku cannot be solved",
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      { text: "OK", onPress: () => console.log("OK Pressed") }
+    ]
+  );
 
   useEffect(() => {
     dispatch(getSudokuAsync(difficulty));
   }, [dispatch])
+
+  useEffect(() => {
+      if (status == 'broken' || status == 'unsolvable') {
+       alert();
+      } else if (status == 'solved') {
+        navigation.navigate('Finish', {
+        })
+      }
+  }, [status])
 
   function generateBoxRow() {
     return (
@@ -26,10 +47,16 @@ export default function Game ({ route }) {
     )
   }
 
-  function solveGames () {
+  function  solveGames () {
     let board = { board : dataStore}
     
     dispatch(solveSudokuAsync(board))
+  }
+
+  function checkGames () {
+    let board = { board : dataStore}
+    
+    dispatch(validateSudokuAsync(board))
   }
 
   return (
@@ -39,9 +66,12 @@ export default function Game ({ route }) {
       
       { generateBoxRow() }
 
-      <Text>Status { status }</Text>
+      <Text> Status { status } </Text>
       <View>
         <Button title="Solve" onPress={ () => { solveGames() } }/>
+      </View>
+      <View>
+        <Button title="Check" onPress={ () => { checkGames() } }/>
       </View>
     </View>
   );

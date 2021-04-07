@@ -21,7 +21,8 @@ export function getSudokuAsync (difficulty) {
           return data
         })
         .then ( data => {
-          dispatch(getSudoku((data.board)));
+          dispatch(getSudoku((data.board)))
+          dispatch(validateSudoku('unsolved'))
         })
         .catch(err => {
           console.log(err);
@@ -37,7 +38,29 @@ export function solveSudokuAsync (board) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
         .then(response => response.json())
-        .then(response => dispatch(getSudoku(response.solution)))
+        .then(response => {
+          dispatch(getSudoku(response.solution))
+          if (response.status !== 'solved') dispatch(validateSudoku(response.status))  
+        })
         .catch(console.warn)
+  }
+}
+
+export function validateSudoku (payload) {
+  return { type : 'sudoku/setStatus', payload }
+}
+
+export function validateSudokuAsync (board) {
+  return (dispatch) => {
+    fetch('https://sugoku.herokuapp.com/validate', {
+      method: 'POST',
+      body: encodeParams(board),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then(response => response.json())
+      .then(response => {
+        dispatch(validateSudoku(response.status));
+      })
+      .catch(console.warn)
   }
 }

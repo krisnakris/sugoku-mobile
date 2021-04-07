@@ -25,7 +25,7 @@ export default function Number (props) {
 
   return (
     <View>
-      <TextInput style = { styles.input } maxLength= { 1 } value = { angka !== 0 ? angka : '' } onChangeText = {(itemValue) => updateAngka(itemValue)} >
+      <TextInput style = { styles.input } maxLength= { 1 } value = { angka !== 0 ? `${angka}` : '' } onChangeText = {(itemValue) => updateAngka(itemValue)} >
       </TextInput>
     </View>
   )

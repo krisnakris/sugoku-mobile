@@ -1,8 +1,10 @@
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, Alert, Button, View } from 'react-native';
 
 export default function Finish ( {} ) {
   return (
     <>
-      <h3>Hello world</h3>
+      <Text>Hello world</Text>
     </>
   )
 }

@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './components/Home';
 import Game from './components/Game';
+import Finish from './components/Finish';
 import { Provider } from 'react-redux';
 import store from './store/index';
 
@@ -17,7 +18,8 @@ export default function App() {
       <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name = "Home" component = { Home }></Stack.Screen>
-        <Stack.Screen name= "Game" component={ Game } />
+        <Stack.Screen name= "Game" component= { Game } />
+        <Stack.Screen name= "Finish" component= { Finish } />
       </Stack.Navigator>
       </NavigationContainer>
     </Provider>

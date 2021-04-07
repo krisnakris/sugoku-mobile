@@ -9,8 +9,8 @@ function reducer (state = initialState, action) {
 
   if (type === 'sudoku/getSudoku') {
     return { ...state, sudokuStore : payload }
-  } else if (type === 'sudoku/validateSudoku') {
-    return { ...state, sudokuStore : payload }
+  } else if (type === 'sudoku/setStatus') {
+    return { ...state, status : payload }
   }
 
   return state;
