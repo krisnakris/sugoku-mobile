@@ -1,7 +1,7 @@
-
 const initialState = {
   sudokuStore : [],
-  status : 'unsolved'
+  status : 'unsolved',
+  startSudokuStore : []
 }
 
 function reducer (state = initialState, action) {
@@ -13,6 +13,8 @@ function reducer (state = initialState, action) {
     return { ...state, status : payload }
   } else if ( type === 'sudoku/done') {
     return { ...state, sudokuStore : [], status : 'unsolved' }
+  } else if (type === 'sudoku/startSudoku') {
+    return { ...state, sudokuStore : payload, startSudokuStore : payload }
   }
 
   return state;

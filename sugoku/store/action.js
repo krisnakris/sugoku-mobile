@@ -68,3 +68,26 @@ export function validateSudokuAsync (board) {
 export function clearBoard () {
   return { type : 'sudoku/done' }
 }
+
+export function getSudokuStart (payload) {
+  return { type : 'sudoku/startSudoku', payload }
+}
+
+export function getSudokuStartAsync (difficulty) {
+  return (dispatch) => {
+      axios({
+        url : 'https://sugoku2.herokuapp.com/board?difficulty=' + difficulty,
+        method : "GET",
+      })
+        .then( ({ data }) => {
+          return data
+        })
+        .then ( data => {
+          dispatch(getSudokuStart((data.board)))
+          dispatch(validateSudoku('unsolved'))
+        })
+        .catch(err => {
+          console.log(err);
+        })
+  }
+}

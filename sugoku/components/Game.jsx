@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, Alert, Button, View } from 'react-native';
 import Board from './Board';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSudokuAsync, solveSudokuAsync, validateSudokuAsync } from '../store/action';
+import { getSudokuAsync, getSudokuStartAsync, solveSudokuAsync, validateSudokuAsync } from '../store/action';
 
 export default function Game ({ route, navigation }) {
   const { username, difficulty } = route.params;
@@ -25,7 +25,7 @@ export default function Game ({ route, navigation }) {
   );
 
   useEffect(() => {
-    dispatch(getSudokuAsync(difficulty));
+    dispatch(getSudokuStartAsync(difficulty));
   }, [dispatch])
 
   useEffect(() => {
