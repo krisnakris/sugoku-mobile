@@ -1,24 +1,20 @@
 import { TextInput, Text, View, StyleSheet } from "react-native"
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { validateSudokuAsync } from '../store/action';
-import encodeBoards from '../helpers/encodeParam';
+import { getSudoku } from '../store/action';
 
 export default function Number (props) {
-  const { angka, indexBaris, indexKolom } = props;
-
+  
   const sudoku = useSelector(state => state.sudokuStore);
   const dispacth = useDispatch();
+  const { angka, indexBaris, indexKolom } = props;
 
   function updateAngka (angka) {
-    let newSudoku = sudoku;
-    newSudoku[indexBaris][indexKolom] = Number(angka);
-    let data = { board : newSudoku };
-
+    let newSudoku = JSON.parse(JSON.stringify(sudoku));
+    newSudoku[indexBaris][indexKolom] = (+angka);
+    dispacth(getSudoku(newSudoku));
   }
   
-  // onChangeText = { (itemValue) => updateAngka(itemValue) 
-
   function isEditable () {
     if (angka !== 0) {
       return false;
@@ -29,8 +25,7 @@ export default function Number (props) {
 
   return (
     <View>
-      <TextInput style = { styles.input } keyboardType = 'numeric' maxLength= { 1 } >
-        { angka !== 0 ? angka : '' }
+      <TextInput style = { styles.input } maxLength= { 1 } value = { angka !== 0 ? angka : '' } onChangeText = {(itemValue) => updateAngka(itemValue)} >
       </TextInput>
     </View>
   )
@@ -42,6 +37,5 @@ const styles = StyleSheet.create({
     width : 40,
     borderWidth : 1,
     textAlign: 'center'
-
   }
 });

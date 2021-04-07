@@ -1,7 +1,7 @@
 
 const initialState = {
   sudokuStore : [],
-  status : ''
+  status : 'unsolved'
 }
 
 function reducer (state = initialState, action) {

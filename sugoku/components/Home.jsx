@@ -2,7 +2,7 @@ import { StyleSheet, Text, TextInput, Picker, Button, View, SafeAreaView } from 
 import React, { useEffect, useState } from 'react';
 
 export default function Home ({ navigation }) {
-  const [difficulty, setDifficulty] = useState('')
+  const [difficulty, setDifficulty] = useState('easy')
   const [username, setUsername] = useState('');
 
   return (
