@@ -51,7 +51,7 @@ export default function Home ({ navigation }) {
         </SafeAreaView>
       </View>
 
-      <View>
+      <View style={ styles.picker }>
         <Picker
           selectedValue = { difficulty }
           style = {{ height: 50, width: 100 }}
@@ -86,9 +86,13 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     margin: 12,
-    borderWidth: 1,
+    borderBottomColor : 'black',
+    borderBottomWidth : 2
   },
   start : {
     marginTop: 200
+  },
+  picker : {
+    marginTop: 30
   }
 });
