@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, Alert, Button, View } from 'react-native';
+import { StyleSheet, Text, Alert, Button, View, TouchableOpacity } from 'react-native';
 import Board from './Board';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSudokuAsync, getSudokuStartAsync, solveSudokuAsync, validateSudokuAsync } from '../store/action';
@@ -68,12 +68,20 @@ export default function Game ({ route, navigation }) {
       { generateBoxRow() }
 
       <Text style={ styles.status }> Status : { status } </Text>
-      <View style={ styles.solve }>
-        <Button title="Solve" onPress={ () => { solveGames() } }/>
-      </View>
-      <View style={ styles.check }>
-        <Button title="Check" onPress={ () => { checkGames() } }/>
-      </View>
+        
+        <View style={ styles.solve }>
+          <TouchableOpacity style={ styles.button } onPress={ () => { solveGames() } }> 
+            <Text style={{ color: 'white' }}>
+              Solve 
+            </Text> 
+          </TouchableOpacity>
+          <TouchableOpacity style={ styles.button }  onPress={ () => { checkGames() } }> 
+            <Text style={{ color: 'white' }}> 
+              Check
+            </Text> 
+          </TouchableOpacity>
+        </View>
+ 
     </View>
   );
 }
@@ -94,8 +102,16 @@ const styles = StyleSheet.create({
   status: {
     marginTop: 20
   },
+  button: {
+    margin : 10,
+    backgroundColor : '#2196f3',
+    padding : 10,
+  },
   solve: {
-    marginTop: 20
+    marginTop: 20,
+    flex : 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   check: {
     marginTop: 20
